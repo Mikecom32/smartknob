@@ -24,10 +24,11 @@ electronics_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 repo_root = os.path.dirname(electronics_root)
 sys.path.append(repo_root)
 
-from util import file_util
 from export_util import (
     versioned_file,
 )
+
+from util import file_util
 
 logging.basicConfig(level=logging.DEBUG)
 logger = logging.getLogger(__name__)
@@ -65,7 +66,7 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('pcb')
     parser.add_argument('--assembly-schematic')
-    parser.add_argument('--alt-fields', nargs='+')
+    parser.add_argument('--alt-fields', nargs='+', default=[])
     parser.add_argument('--release-prefix', type=str, required=True, help='Tag prefix to check if this is a tagged/versioned release. E.g. "releases/" for tags like "releases/v1.0"')
     args = parser.parse_args()
     export_jlcpcb(args.pcb, args.assembly_schematic, args.alt_fields, args.release_prefix)
